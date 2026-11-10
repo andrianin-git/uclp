@@ -44,7 +44,7 @@ section{padding-block:36px 8px}
 .info:hover .tip,.info:focus-within .tip{opacity:1;visibility:visible;transform:none}
 
 .grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px 10px}
-.band{grid-row:2/9;margin:-5px -4px -6px;border-radius:16px;background:color-mix(in srgb,var(--tone) 11%,transparent);border:1px solid color-mix(in srgb,var(--tone) 18%,transparent);pointer-events:none;z-index:0}
+.band{grid-row:2/11;margin:-5px -4px -6px;border-radius:16px;background:color-mix(in srgb,var(--tone) 11%,transparent);border:1px solid color-mix(in srgb,var(--tone) 18%,transparent);pointer-events:none;z-index:0}
 .grid>.mode,.grid>.cell,.grid>.rowlab{z-index:1}
 .rowlab{position:relative;grid-column:1/2;display:flex;flex-direction:column;align-items:flex-start;gap:0;font-family:var(--serif);font-size:19px;line-height:1.2;margin-top:14px;padding-left:4px}
 .rowlab small{font-family:var(--sans);font-size:12px;line-height:1.35;color:var(--muted);margin-top:2px}
@@ -62,6 +62,36 @@ section{padding-block:36px 8px}
 .cell.uk{background:var(--white);border-top:4px solid var(--tone);font-weight:600;font-size:14.5px;min-height:100px}
 .cell:hover{border-color:var(--tone);box-shadow:0 6px 16px -10px var(--tone)}
 .cell .ctry{display:none}
+.cell .sum{display:block}
+.cell .rate{display:none;font-size:13px;font-weight:600;color:var(--ink)}
+.cell.compact{padding:9px 28px 9px 12px;display:flex;align-items:center;gap:8px;min-height:0}
+.cell.compact .sum{display:none}
+.cell.compact .rate{display:inline}
+.cell.compact .go{top:50%;transform:translateY(-50%)}
+.cell:not(.compact){display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px}
+.cell .dot{float:none;margin:3px 0 0 1px}
+.cell.compact .dot{float:none;margin:0}
+.dot{display:inline-block;flex:none;width:12px;height:12px;border-radius:50%;background:var(--dot);box-shadow:0 0 0 2px var(--white),0 0 0 3px color-mix(in srgb,var(--dot) 45%,transparent)}
+.r3{--dot:#c0392b}.r2{--dot:#e07b24}.r1{--dot:#d9b310}.r0{--dot:#2f9e5b}
+.lane-name{border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.lane-name .arr{font-size:13px;color:var(--muted)}
+.lane-name:hover{text-decoration:underline;text-underline-offset:4px}
+.lane-name:hover .arr{color:var(--ink)}
+.rowlab .lane-btn{margin-top:6px;border:1px solid var(--line);background:var(--white);border-radius:999px;padding:3px 10px;font:600 12px/1.4 var(--sans);color:var(--ink);cursor:pointer}
+.rowlab .lane-btn:hover{border-color:var(--ink)}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin:-4px 0 18px}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;font-size:13.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend .lab{font-weight:700;color:var(--ink)}
+.all-btn{border:0;background:none;padding:0;color:#205d71;font-weight:600;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.all-btn:hover{color:var(--ink)}
+.rating{display:inline-flex;align-items:center;gap:8px;margin:2px 0 4px;font-size:14px;font-weight:600;padding:5px 12px 5px 9px;border-radius:999px;background:color-mix(in srgb,var(--dot) 12%,var(--white));border:1px solid color-mix(in srgb,var(--dot) 40%,transparent)}
+.cmp{display:flex!important;align-items:flex-start;gap:10px}
+.cmp .dot{margin-top:5px}
+.cmp span{min-width:0}
+.dotrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.dotrow .cmp{flex-direction:column;gap:6px}
+.dotrow .cmp b{display:flex;align-items:center;gap:8px}
 
 /* pop-up */
 .modal-bg{position:fixed;inset:0;z-index:80;background:rgba(13,29,41,.63);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
@@ -153,8 +183,11 @@ body.modal-open{overflow:hidden}
   .mode{min-height:0;flex-direction:row;align-items:baseline;gap:10px;margin-top:14px}
   .mode .more{display:none}
   .cell{display:flex;gap:10px;align-items:baseline}
-  .cell .ctry{display:inline;flex:none;width:68px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .cell .ctry{display:inline;flex:none;width:86px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .cell.uk{min-height:0}
+  .cell .dot{float:none;margin:0}
+  .cell:not(.compact){flex-direction:row;align-items:baseline;gap:10px}
+  .dotrow{grid-template-columns:1fr 1fr}
   .dialog{padding:24px 20px}
   .loop-shell{padding:18px 14px}
   .inaction{padding:20px 18px;gap:14px}
@@ -170,7 +203,7 @@ body.modal-open{overflow:hidden}
   <div class="wrap">
     <div class="eyebrow">Pharos Futures / UCLP Foresight Clinic · Board overview</div>
     <h1>Why healthcare<br>innovation fails.</h1>
-    <p>Seven failure modes. One recurrent pattern: <strong>the capacity to invent outpaces the capacity to adopt.</strong> See how each mode works, and how it typically shows up in the UK, Germany and Brazil.</p>
+    <p>Seven failure modes. One recurrent pattern: <strong>the capacity to invent outpaces the capacity to adopt.</strong> See how each mode works, and how it typically shows up in the UK, Germany, Singapore and Brazil.</p>
     <div class="hero-actions">
       <a class="btn" href="#overview">Explore the seven failure modes ↓</a>
       <a class="btn ghost" href="#loops">How failures reinforce one another</a>
@@ -181,7 +214,11 @@ body.modal-open{overflow:hidden}
 <div class="wrap">
   <section id="overview" aria-labelledby="ovTitle">
     <div class="sec-head">
-      <div class="ttl"><h2 id="ovTitle">The seven failure modes at a glance</h2><span class="info"><button class="info-btn" type="button" aria-label="How to read this" aria-describedby="tipOv">i</button><span class="tip" role="tooltip" id="tipOv">The coloured boxes explain each failure mode. The rows below show how it typically plays out in each country. Open any box for more detail, an example and a comparison with the other two countries. Countries are not ranked against each other.</span></span></div>
+      <div class="ttl"><h2 id="ovTitle">The seven failure modes at a glance</h2><span class="info"><button class="info-btn" type="button" aria-label="How to read this" aria-describedby="tipOv">i</button><span class="tip" role="tooltip" id="tipOv">The coloured boxes explain each failure mode. The UK row shows how it typically plays out in the NHS. Germany, Singapore and Brazil are collapsed to a rating dot: open a row to read the summaries, or open any box for detail, an example and a comparison. The dots are our assessment of how exposed each system is, based on the examples shown; Singapore is a small city-state, so its results may not transfer directly.</span></span></div>
+    </div>
+    <div class="toolbar">
+      <div class="legend" aria-label="Rating key"><span class="lab">How exposed is each system?</span><span><i class="dot r3"></i>Severe</span><span><i class="dot r2"></i>Present</span><span><i class="dot r1"></i>Partly guarded</span><span><i class="dot r0"></i>Better guarded</span></div>
+      <button class="all-btn" id="allBtn" type="button" aria-pressed="false">Expand all</button>
     </div>
     <div class="grid" id="grid"></div>
   </section>
@@ -236,7 +273,35 @@ const FAM = [
   {name:"Coordination, regulation & economics", span:[3,5]},
   {name:"Trust & evidence", span:[6,7]}
 ];
-const C = {uk:"UK", de:"Germany", br:"Brazil"};
+const C = {uk:"UK", de:"Germany", sg:"Singapore", br:"Brazil"};
+const ORDER = ["uk","de","sg","br"];
+const SYS = {uk:"NHS England", de:"Statutory health insurance (GKV)", sg:"Ministry of Health and three public clusters", br:"Unified Health System (SUS)"};
+const RATE = ["Better guarded","Partly guarded","Present","Severe"];
+/* our assessment of exposure to each failure mode: 3 strongly present … 0 better guarded */
+const R = {1:{uk:3,de:2,sg:1,br:3}, 2:{uk:3,de:2,sg:0,br:2}, 3:{uk:3,de:3,sg:0,br:3}, 4:{uk:3,de:1,sg:0,br:2}, 5:{uk:2,de:2,sg:0,br:2}, 6:{uk:2,de:2,sg:1,br:2}, 7:{uk:2,de:1,sg:0,br:2}};
+const SG = {
+ 1:{g:"Shared public-sector record being rolled out; fit still depends on local co-design",
+    how:"Singapore’s public healthcare clusters are moving onto one shared electronic medical record, built and run by the national health-tech agency, Synapxe. A common platform reduces the number of systems staff juggle, but whether a tool fits daily work still depends on how carefully each cluster redesigns its workflows.",
+    ex:"When the National University Health System moved all its institutions onto the shared record in February 2022, more than 400 workflows were adjusted and staff went through over 80 training tracks across 16 weeks. NHG Health has since joined, and SingHealth is due to follow by 2028."},
+ 2:{g:"One funded national health-tech agency serves all public clusters",
+    how:"Synapxe (formerly IHiS) builds and runs digital systems for Singapore’s public healthcare, from the national health record to the HealthHub patient app, so clusters do not each have to build implementation teams from scratch. The trade-off is concentration: weaknesses in one agency affect the whole system.",
+    ex:"The national health record Synapxe runs is used by more than 21,000 health professionals and administrators every month. But after hackers stole 1.5 million SingHealth patients’ data in 2018, the official inquiry found the agency’s staff lacked adequate cybersecurity awareness, training and resources."},
+ 3:{g:"Ministry of Health steers three integrated clusters; decisions are system-wide",
+    how:"Singapore’s Ministry of Health sets direction for three public healthcare clusters, each responsible for the health of one region. Because the ministry plans, funds and coordinates national programmes centrally, they can be rolled out through all three clusters at once rather than negotiated site by site.",
+    ex:"In 2017 the ministry merged six regional health systems into three integrated clusters to shift care from hospitals into the community. National programmes such as the shared electronic record and the Healthier SG prevention programme are now delivered through all three."},
+ 4:{g:"Central funding, with assessment tied to what gets subsidised",
+    how:"Singapore funds care through government subsidies alongside national savings and insurance schemes such as MediShield Life. Its health technology assessment agency (ACE) evaluates value for money, and the ministry ties subsidies and insurance cover to those assessments, so a positive assessment comes with a route to payment.",
+    ex:"Since September 2022, the national insurance scheme MediShield Life only pays for cancer drugs on an assessed Cancer Drug List. Most listed drugs had their prices cut to get on it, by about 30% on average and up to 65%."},
+ 5:{g:"Single device regulator; rule changes announced early and phased in",
+    how:"The Health Sciences Authority regulates medical devices, including AI software, and the Ministry of Health licenses healthcare services. Major regulatory changes are usually announced well ahead and introduced in phases, giving providers time to adapt.",
+    ex:"Singapore replaced its 1980 law on private hospitals and clinics with the Healthcare Services Act in three phases between January 2022 and December 2023, after revising the timeline once during COVID-19. Teleconsultation services, for example, have needed a licence since 26 June 2023."},
+ 6:{g:"Top-down model; a 2018 cyberattack set back data sharing",
+    how:"Singapore’s system is largely steered from the top, and there is little published evidence on how far clinicians trust new tools. Public support for sharing health records was high, but a major data breach showed how quickly plans stall when trust is shaken.",
+    ex:"In 2018 hackers stole the personal data of 1.5 million SingHealth patients, and the government halted plans to require all providers to share data with the national health record. The law making that sharing mandatory was only passed in January 2026, to take effect from 2027."},
+ 7:{g:"National agency links assessment to funding; AI tools monitored after approval",
+    how:"Singapore’s Agency for Care Effectiveness (ACE) assesses whether drugs, implants and other technologies are worth funding. The device regulator also expects makers of AI software to keep monitoring real-world performance after approval and to notify significant changes.",
+    ex:"Since December 2023, implants in public hospitals have been subsidised on a national list based on ACE assessments; before that, subsidies varied from hospital to hospital. Listing requires full regulatory approval and, for new types of implant, around two years of clinical and economic review."}
+};
 /* g = grid summary of how this mode typically looks in the country; how = how it works there and where the bottleneck is; ex = a two-sentence example */
 const M = [
  {n:1, tone:"--t1", short:"Workflow misfit", name:"Technology–user & clinical workflow misalignment",
@@ -340,6 +405,18 @@ const M = [
 ];
 const LUNCH = {L1:["Innovation lunch, 23 September","https://docs.google.com/document/d/1ptg16UqDh8uTXJVaPukTD_TDZSyrueFfIkUyfXbVgcM/edit"],L2:["Innovation lunch, 28 September","https://docs.google.com/document/d/1GfDMsw3Hc4kCKo3LpRg1a1IIvQBlA06ZnwvJPZzoQIM/edit"],L3:["Innovation lunch, 16 October","https://docs.google.com/document/d/1XYuVcCWTXyV3_Yl9cwGpxiCc9bRNhBkFBFtSimvlme0/edit"],L4:["Innovation lunch, 20 October","https://docs.google.com/document/d/1Z_LDZeN5uhQA47AwUooAGIHEKCoy8MhkVTA96SL4jY4/edit"]};
 const SRC = [
+  ["Singapore: Launch of Synapxe (Synapxe, July 2023)","https://www.synapxe.sg/news/events/launch-of-synapxe-minister-ong-ye-kung"],
+  ["Singapore: First cluster on the Next Generation EMR (Synapxe)","https://www.synapxe.sg/blog/national-programmes/first-healthcare-cluster-to-onboard-the-next-generation-electronic-medical-record-ngemr"],
+  ["Singapore: Shared EMR for all clusters and SAF by 2028 (Oct 2025)","https://sg.news.yahoo.com/centralised-saf-public-healthcare-medical-093000253.html"],
+  ["Singapore: Reorganisation into three clusters (MOH, Jan 2017)","https://www.moh.gov.sg/news-highlights/details/reorganisation-of-healthcare-system-into-three-integrated-clusters-to-better-meet-future-healthcare-needs"],
+  ["Singapore: Cancer Drug List (Minister's speech, Sept 2022)","https://www.moh.gov.sg/newsroom/speech-by-mr-ong-ye-kung-minister-for-health-at-singapore-cancer-society's-gala-dinner-2-september-2022-730pm-at-the-ritz-carlton-millenia-singapore/"],
+  ["Singapore: Implant Subsidy List (ISPOR, Mar 2024)","https://ispor.org/publications/newsletters/news-across/view/2024/03/04/singapore-policy-update--implementation-of-implant-subsidy-list"],
+  ["Singapore: Healthcare Services Act phase 2 (MOH)","https://www.moh.gov.sg/news-highlights/details/phase-2-of-healthcare-services-act-to-start-on-26-june-2023"],
+  ["Singapore: Healthcare Services Act phase 3, Dec 2023 (Allen & Gledhill)","https://www.allenandgledhill.com/sg/publication/articles/27235/third-and-final-phase-of-healthcare-services-act-2020-in-force-from-18-december-2023-repeals-private-hospitals-and-medical-clinics-act-1980-new-regulations-on-nursing-home-services"],
+  ["Singapore: HSA life-cycle guidance for AI software (RegDesk)","https://regdesk.co/hsa-guidance-on-a-life-cycle-approach-for-ai-based-medical-devices-specifics-post-market-monitoring-and-changes"],
+  ["Singapore: SingHealth cyberattack inquiry (SCL)","https://www.scl.org/10405-singapore-s-worst-cyber-attack-the-outcome-of-the-investigation/"],
+  ["Singapore: NEHR plans halted after 2018 attack (Civil Service College, Ethos)","https://knowledge.csc.gov.sg/ethos-issue-26/realising-the-promise-of-health-information/"],
+  ["Singapore: Health Information Bill passed, Jan 2026 (Rajah & Tann)","https://www.rajahtannasia.com/viewpoints/health-information-bill-passed-facilitating-coordinated-care-across-singapores-healthcare-ecosystem/"],
   ["Loops and inaction: "+LUNCH.L1[0], LUNCH.L1[1]],
   ["Loops: "+LUNCH.L2[0], LUNCH.L2[1]],
   ["Loops and inaction: "+LUNCH.L3[0], LUNCH.L3[1]],
@@ -378,31 +455,40 @@ const SRC = [
 const $ = s => document.querySelector(s);
 const esc = t => String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const tone = m => `var(${m.tone})`;
+M.forEach(m => { m.sg = SG[m.n]; m.r = R[m.n]; });
+const dotHTML = r => `<i class="dot r${r}" aria-hidden="true"></i>`;
 const GO = '<svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M10 14l6-6M11 8h5v5"/></svg>';
 
 /* grid: DOM ordered by failure mode so it stacks naturally on phones */
+const open = {de:false, sg:false, br:false};
 function renderGrid(){
   let h = "";
   FAM.forEach(f => h += `<div class="fam" style="grid-column:${f.span[0]}/${f.span[1]+1}">${esc(f.name)}</div>`);
-  h += `<div class="rowlab" style="grid-row:3">UK<small>NHS England</small></div>`;
-  h += `<div class="rowlab" style="grid-row:5">Germany<small>Statutory health insurance (GKV)</small></div>`;
-  h += `<div class="rowlab" style="grid-row:7">Brazil<small>Unified Health System (SUS)</small></div>`;
+  ORDER.forEach((k,i) => {
+    const row = 3 + i*2;
+    const name = k === "uk" ? C[k] : `<button class="lane-name" type="button" data-lane="${k}" aria-expanded="${open[k]}" title="${open[k] ? "Hide" : "Show"} ${C[k]} details">${C[k]}<span class="arr" aria-hidden="true">${open[k] ? "▾" : "▸"}</span></button>`;
+    h += `<div class="rowlab" style="grid-row:${row}">${name}${(k === "uk" || open[k]) ? `<small>${esc(SYS[k])}</small>` : ""}</div>`;
+  });
   M.forEach(m => {
     const c = m.n;
     h += `<div class="band" aria-hidden="true" style="--tone:${tone(m)};grid-column:${c}"></div>`;
     h += `<button class="mode" type="button" style="--tone:${tone(m)};grid-column:${c}" data-open="${m.n}" aria-haspopup="dialog" aria-label="Failure mode ${m.n}: ${esc(m.name)}. Open explanation">${GO}<span class="num">${m.n}</span><span class="nm">${esc(m.short)}</span></button>`;
-    [["uk",4],["de",6],["br",8]].forEach(([k,r]) => {
-      h += `<button class="cell ${k}" type="button" style="--tone:${tone(m)};grid-column:${c};grid-row:${r}" data-open="${m.n}-${k}" aria-haspopup="dialog" aria-label="${C[k]}, ${esc(m.short)}: ${esc(m[k].g)}. Open details">${GO}<span class="ctry">${C[k]}</span><span>${esc(m[k].g)}</span></button>`;
+    ORDER.forEach((k,i) => {
+      const row = 4 + i*2, r = m.r[k], compact = k !== "uk" && !open[k];
+      h += `<button class="cell ${k}${compact ? " compact" : ""}" type="button" style="--tone:${tone(m)};grid-column:${c};grid-row:${row}" data-open="${m.n}-${k}" aria-haspopup="dialog" aria-label="${C[k]}, ${esc(m.short)}: ${RATE[r]}. ${esc(m[k].g)}. Open details" title="${RATE[r]}">${GO}<span class="ctry">${C[k]}</span>${dotHTML(r)}<span class="rate">${RATE[r]}</span><span class="sum">${esc(m[k].g)}</span></button>`;
     });
   });
   $("#grid").innerHTML = h;
+  const all = ["de","sg","br"].every(k => open[k]);
+  $("#allBtn").textContent = all ? "Collapse all" : "Expand all";
+  $("#allBtn").setAttribute("aria-pressed", String(all));
 }
 
 /* pop-ups */
 function ctaRow(m, except){
   const links = [];
   if(except !== "mode") links.push(`<button class="cta" data-open="${m.n}">About failure mode ${m.n}: ${esc(m.short)} →</button>`);
-  if(except === "mode") ["uk","de","br"].forEach(k => { links.push(`<button class="cta" data-open="${m.n}-${k}">${C[k]} →</button>`); });
+
   return `<div class="ctas">${links.join("")}</div>`;
 }
 function render(id){
@@ -419,15 +505,16 @@ function render(id){
       <h5>Signals to look for</h5><ul class="signals">${m.signals.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
       <h5>Submechanisms</h5><ul class="subs">${m.subs.map(s => `<li><b>${esc(s[0])}</b>${esc(s[1])}</li>`).join("")}</ul>
       <h5>Ask</h5><p class="ask">${esc(m.ask)}</p>
-      ${ctaRow(m, "mode")}`;
+      <h5>How the four systems compare</h5><div class="compare dotrow">${ORDER.map(o => `<button class="cmp" data-open="${m.n}-${o}"><b>${dotHTML(m.r[o])}${C[o]}</b><span>${RATE[m.r[o]]} →</span></button>`).join("")}</div>`;
   } else {
     const d = m[k];
-    const others = ["uk","de","br"].filter(x => x !== k);
+    const others = ORDER.filter(x => x !== k);
     h = `<div class="eyebrow">${C[k]} · Failure mode ${m.n}: ${esc(m.short)}</div>
       <h3 id="dTitle">${esc(d.g)}</h3>
+      <span class="rating r${m.r[k]}">${dotHTML(m.r[k])}${RATE[m.r[k]]}</span>
       <h5>How it works ${k==="uk"?"in the UK":"in "+C[k]}</h5><p class="lead">${esc(d.how)}</p>
       <h5>Example</h5><p class="example">${esc(d.ex)}</p>
-      <h5>Compared with</h5><div class="compare">${others.map(o => `<button class="cmp" data-open="${m.n}-${o}"><b>${C[o]}</b>${esc(m[o].g)} →</button>`).join("")}</div>
+      <h5>Compared with</h5><div class="compare">${others.map(o => `<button class="cmp" data-open="${m.n}-${o}">${dotHTML(m.r[o])}<span><b>${C[o]} · ${RATE[m.r[o]]}</b>${esc(m[o].g)} →</span></button>`).join("")}</div>
       ${ctaRow(m, k)}`;
   }
   $("#dBody").innerHTML = h;
@@ -520,6 +607,10 @@ $("#inBtn").addEventListener("click", () => {
   const box = $("#inMore"), b = $("#inBtn"); box.hidden = !box.hidden;
   b.setAttribute("aria-expanded", String(!box.hidden)); b.textContent = box.hidden ? "Explore the mechanism +" : "Hide the mechanism −";
 });
+document.addEventListener("click", e => {
+  const l = e.target.closest("[data-lane]"); if(l){ open[l.dataset.lane] = !open[l.dataset.lane]; renderGrid(); return; }
+});
+$("#allBtn").addEventListener("click", () => { const v = !["de","sg","br"].every(k => open[k]); ["de","sg","br"].forEach(k => open[k] = v); renderGrid(); });
 renderGrid(); renderLoop();
 </script>
 
